@@ -19,13 +19,9 @@ spec:
           image: "{{ .Values.idIndexApi.image.repository }}:{{ .Values.idIndexApi.image.tag }}"
           imagePullPolicy: {{ .Values.idIndexApi.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:
-            - containerPort: 3012
+            - containerPort: {{ .Values.idIndexApi.service.port }}
               name: http
           livenessProbe:
-            httpGet:
-              path: {{ .Values.idIndexApi.healthCheck }}
-              port: http
+            {{- toYaml .Values.livenessProbe | nindent 12 }}
           readinessProbe:
-            httpGet:
-              path: {{ .Values.idIndexApi.healthCheck }}
-              port: http
+            {{- toYaml .Values.readinessProbe | nindent 12 }}
