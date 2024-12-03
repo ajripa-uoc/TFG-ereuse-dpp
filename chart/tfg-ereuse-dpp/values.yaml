@@ -122,8 +122,14 @@ tolerations: []
 
 affinity: {}
 
+# Global configuration for all resources
 global:
   imagePullPolicy: Always
+
+# Environment variables used by the application
+# They are stored in a ConfigMap and accessed by the application
+config:
+  miningInterval: 1000
 
 # id-index-api
 idIndexApi:
@@ -165,8 +171,5 @@ blockchainNode:
   service:
     type: ClusterIP
     port: 8545
-
-  config:
-    miningInterval: 1000
 
 
