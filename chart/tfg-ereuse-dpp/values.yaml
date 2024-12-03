@@ -155,7 +155,6 @@ idIndexApi:
 # blockchain-node
 blockchainNode:
   replicaCount: 1
-
   name: blockchain-node
   image:
     repository: ""
