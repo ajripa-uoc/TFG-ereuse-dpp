@@ -31,7 +31,7 @@ main() {
         docker compose up ${detach_arg:-}
 }
 
-main "${@}"
+main "${@:-}"
 
 # written in emacs
 # -*- mode: shell-script; -*-

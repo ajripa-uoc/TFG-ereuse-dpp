@@ -122,3 +122,6 @@ dist
 
 # vim temp files
 *.swp
+
+# Shared folder
+shared/**
