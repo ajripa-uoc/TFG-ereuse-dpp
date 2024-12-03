@@ -13,4 +13,4 @@ spec:
       name: http
   selector:
     {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 4 }}
-    app: {{ .Values.idIndexApi.name }}
+    app.kubernetes.io/app: {{ .Values.idIndexApi.name }}

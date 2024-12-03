@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
        {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
-       app: {{ .Values.blockchainNode.name }}
+       app.kubernetes.io/app: {{ .Values.blockchainNode.name }}
   template:
     metadata:
       labels:
