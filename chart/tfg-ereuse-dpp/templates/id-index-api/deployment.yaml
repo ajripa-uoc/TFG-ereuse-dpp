@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.idIndexApi.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.idIndexApi.replicaCount }}
+  selector:
+    matchLabels:
+       {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.idIndexApi.image.repository }}:{{ .Values.idIndexApi.image.tag }}"
+          imagePullPolicy: {{ .Values.idIndexApi.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: 3012
+              name: http
+          livenessProbe:
+            httpGet:
+              path: /
+              port: http
+          readinessProbe:
+            httpGet:
+              path: /
+              port: http

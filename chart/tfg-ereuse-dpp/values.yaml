@@ -121,3 +121,16 @@ nodeSelector: {}
 tolerations: []
 
 affinity: {}
+
+global:
+  imagePullPolicy: IfNotPresent
+
+idIndexApi:
+  replicaCount: 1
+  name: id-index-api
+  image:
+    repository: ""
+    tag: ""
+    pullPolicy: IfNotPresent
+  podlabels: {}
+
