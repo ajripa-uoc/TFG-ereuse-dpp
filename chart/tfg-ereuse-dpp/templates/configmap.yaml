@@ -5,4 +5,6 @@ metadata:
   labels:
     {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
 data:
-  MINING_INTERVAL: "{{ .Values.config.miningInterval }}"
+ {{- range $key, $value := .Values.config }}
+ {{ $key }}: {{ $value | quote }}
+ {{- end }}
