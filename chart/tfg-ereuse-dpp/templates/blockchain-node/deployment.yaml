@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.blockchainNode.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.blockchainNode.replicaCount }}
+  selector:
+    matchLabels:
+       {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.blockchainNode.image.repository }}:{{ .Values.blockchainNode.image.tag }}"
+          imagePullPolicy: {{ .Values.blockchainNode.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.blockchainNode.service.port }}
+              name: http
+          env:
+            - name: MINING_INTERVAL
+              value: "{{ .Values.blockchainNodeconfig.miningInterval }}"
+          livenessProbe:
+            {{- toYaml .Values.blockchainNode.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.blockchainNode.readinessProbe | nindent 12 }}

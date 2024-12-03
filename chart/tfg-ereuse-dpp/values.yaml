@@ -125,6 +125,7 @@ affinity: {}
 global:
   imagePullPolicy: Always
 
+# id-index-api
 idIndexApi:
   replicaCount: 1
   name: id-index-api
@@ -144,5 +145,28 @@ idIndexApi:
   service:
     type: ClusterIP
     port: 3012
+
+# blockchain-node
+blockchainNode:
+  replicaCount: 1
+
+  name: blockchain-node
+  image:
+    repository: ""
+    tag: ""
+
+  livenessProbe:
+    tcpSocket:
+      port: 8545
+  readinessProbe:
+    tcpSocket:
+      port: 8545
+
+  service:
+    type: ClusterIP
+    port: 8545
+
+  config:
+    miningInterval: 1000
 
 
