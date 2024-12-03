@@ -23,7 +23,7 @@ spec:
               name: http
           env:
             - name: MINING_INTERVAL
-              value: "{{ .Values.blockchainNodeconfig.miningInterval }}"
+              value: "{{ .Values.blockchainNode.config.miningInterval }}"
           livenessProbe:
             {{- toYaml .Values.blockchainNode.livenessProbe | nindent 12 }}
           readinessProbe:
