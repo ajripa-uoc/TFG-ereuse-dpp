@@ -22,6 +22,6 @@ spec:
             - containerPort: {{ .Values.idIndexApi.service.port }}
               name: http
           livenessProbe:
-            {{- toYaml .Values.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.idIndexApi.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{- toYaml .Values.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.idIndexApi.readinessProbe | nindent 12 }}
