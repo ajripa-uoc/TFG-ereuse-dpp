@@ -10,4 +10,4 @@ RUN npm install hardhat '@nomicfoundation/hardhat-ethers' ethers --loglevel=erro
 COPY --chown=node:node hardhat.config.js ./hardhat.config.js
 
 EXPOSE 8545
-CMD ["npx","hardhat","node"]
+CMD ["npx","hardhat","node", "--hostname", "0.0.0.0"]
