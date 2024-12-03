@@ -123,7 +123,7 @@ tolerations: []
 affinity: {}
 
 global:
-  imagePullPolicy: IfNotPresent
+  imagePullPolicy: Always
 
 idIndexApi:
   replicaCount: 1
@@ -131,6 +131,4 @@ idIndexApi:
   image:
     repository: ""
     tag: ""
-    pullPolicy: IfNotPresent
-  podlabels: {}
 
