@@ -14,6 +14,7 @@ spec:
     metadata:
       labels:
         {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+        app.kubernetes.io/app: {{ .Values.blockchainNode.name }}
     spec:
       containers:
         - name: id-index-api
