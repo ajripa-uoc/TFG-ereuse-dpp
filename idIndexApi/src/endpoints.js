@@ -8,6 +8,17 @@ var filePath = "../data/id_url.json"
 
 router
 
+// Healthcheck for the API
+.get('/healthz', (req, res) => {
+    try {
+        // Verify file access
+        fs.accessSync(filePath, fs.constants.R_OK | fs.constants.W_OK);
+        res.status(200).json({ status: 'healthy' });
+    } catch (error) {
+        res.status(503).json({ status: 'unhealthy', error: error.message });
+    }
+})
+
 .get('/getURL', (req, res, next) => {
     var id = req.query.id
     try {
@@ -50,10 +61,10 @@ router
         }
         // Read the file contents
         const fileData = fs.readFileSync(filePath, 'utf8');
-      
+
         // Parse the JSON data
         const jsonData = JSON.parse(fileData);
-      
+
         // Use the JSON data
         jsonData.counter++
         const new_id = `DH${jsonData.counter}`

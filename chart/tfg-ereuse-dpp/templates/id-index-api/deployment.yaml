@@ -23,9 +23,9 @@ spec:
               name: http
           livenessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.idIndexApi.healthCheck }}
               port: http
           readinessProbe:
             httpGet:
-              path: /
+              path: {{ .Values.idIndexApi.healthCheck }}
               port: http
