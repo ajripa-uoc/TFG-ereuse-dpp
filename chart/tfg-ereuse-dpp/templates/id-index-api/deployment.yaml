@@ -8,8 +8,8 @@ spec:
   replicas: {{ .Values.idIndexApi.replicaCount }}
   selector:
     matchLabels:
-       {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
-       app.kubernetes.io/app: {{ .Values.idIndexApi.name }}
+      {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/app: {{ .Values.idIndexApi.name }}
   template:
     metadata:
       labels:
