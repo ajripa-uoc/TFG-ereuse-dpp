@@ -8,7 +8,6 @@ USER root
 RUN npm install
 
 COPY src ./src
-COPY data ./data
 
 EXPOSE 3012
 WORKDIR /home/node/idIndexApi/src
