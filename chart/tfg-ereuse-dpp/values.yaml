@@ -128,8 +128,9 @@ global:
 
   sharedStorage:
     name: shared-storage
-    storageClassName: efs
+    className: efs
     mountPath: /shared
+
 # Environment variables used by the application
 # They are stored in a ConfigMap and accessed by the application
 config:

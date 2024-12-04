@@ -13,4 +13,4 @@ spec:
   resources:
     requests:
       storage: 5Gi # Size doesn't matter for EFS but is required by Kubernetes
-  storageClassName: {{ .Values.global.sharedStorage.ClassName }}
+  storageClassName: {{ .Values.global.sharedStorage.className }}
