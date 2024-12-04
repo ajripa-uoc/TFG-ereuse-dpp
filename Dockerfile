@@ -1,4 +1,4 @@
-FROM --platform=linux/amd64 node:20.10.0-alpine
+FROM node:20.10.0-alpine
 RUN mkdir -p /home/node/app/node_modules && chown -R node:node /home/node/app
 WORKDIR /home/node/app
 USER node
@@ -8,7 +8,7 @@ COPY --chown=node:node contracts ./contracts
 COPY --chown=node:node scripts ./scripts
 COPY --chown=node:node src ./src
 COPY --chown=node:node hardhat.config.js ./hardhat.config.js
-#RUN npx hardhat vars set TEST_NODE_IP blockchain_test_node
+#RUN npx hardhat vars set NODE_IP blockchain_test_node
 RUN mkdir -p /home/node/app/shared && chown -R node:node /home/node/app/shared
 
 EXPOSE 3010
