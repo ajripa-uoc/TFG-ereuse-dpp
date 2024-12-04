@@ -190,12 +190,12 @@ apiConnector:
   livenessProbe:
     initialDelaySeconds: 120
     httpGet:
-      path: /healthz
+      path: /
       port: http
   readinessProbe:
     initialDelaySeconds: 120
     httpGet:
-      path: /healthz
+      path: /
       port: http
 
   service:
