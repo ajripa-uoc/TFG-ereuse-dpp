@@ -1,6 +1,6 @@
 require("@nomicfoundation/hardhat-ethers");
 const { vars } = require("hardhat/config");
-const TEST_NODE_IP=vars.get("TEST_NODE_IP", "blockchain_test_node")
+const nodeIp = process.env.NODE_IP || "blockchain_test_node";
 const miningInterval = parseInt(process.env.MINING_INTERVAL, 10) || 1000;
 
 module.exports = {
@@ -20,7 +20,7 @@ module.exports = {
       loggingEnabled: false,
     },
     test: {
-      url: "http://"+TEST_NODE_IP+":8545",
+      url: "http://"+nodeIp+":8545",
       accounts: {
         mnemonic: "discover angle erosion trap barrel wage chest drop one raven tray degree",
         path: "m/44'/60'/0'/0",

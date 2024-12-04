@@ -7,3 +7,8 @@ blockchainNode:
   image:
     repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/blockchain-node"
     tag: "latest"
+
+apiConnector:
+  image:
+    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/api-connector"
+    tag: "latest"

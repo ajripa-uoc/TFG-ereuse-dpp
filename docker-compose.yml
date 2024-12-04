@@ -57,6 +57,7 @@ services:
     # if this exist, writes api-connector_admin-token.txt file to shared path
     environment:
       - SHARED=./shared
+      - NODE_IP=blockchain_test_node
     networks:
       - ereuse
     extra_hosts:
