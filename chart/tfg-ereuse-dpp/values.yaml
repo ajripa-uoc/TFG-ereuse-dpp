@@ -188,10 +188,12 @@ apiConnector:
     tag: ""
 
   livenessProbe:
+    initialDelaySeconds: 60
     httpGet:
       path: /healthz
       port: http
   readinessProbe:
+    initialDelaySeconds: 60
     httpGet:
       path: /healthz
       port: http
