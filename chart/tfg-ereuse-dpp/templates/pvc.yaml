@@ -1,0 +1,16 @@
+# Shared Storage for the DPP
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ .Release.Name }}-{{ .Values.sharedStorage.name }}
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Chart.Name }}
+spec:
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 5Gi # Size doesn't matter for EFS but is required by Kubernetes
+  storageClassName: {{ Values.global.sharedStorage.ClassName }}

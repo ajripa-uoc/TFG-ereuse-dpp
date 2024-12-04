@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.apiConnector.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.apiConnector.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+     app.kubernetes.io/component: {{ .Values.apiConnector.name }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+       app.kubernetes.io/component: {{ .Values.apiConnector.name }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.apiConnector.image.repository }}:{{ .Values.apiConnector.image.tag }}"
+          imagePullPolicy: {{ .Values.apiConnector.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.apiConnector.service.port }}
+              name: http
+          envFrom:
+            - configMapRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+          livenessProbe:
+            {{- toYaml .Values.apiConnector.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.apiConnector.readinessProbe | nindent 12 }}
+          volumeMounts:
+            - name: shared-storage
+              mountPath: {{ Values.global.sharedStorage.mountPath }}
+        volumes:
+          - name: shared-storage
+            persistentVolumeClaim:
+              claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}

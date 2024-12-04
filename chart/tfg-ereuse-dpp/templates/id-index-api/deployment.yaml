@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/app: {{ .Values.idIndexApi.name }}
+     app.kubernetes.io/component: {{ .Values.idIndexApi.name }}
   template:
     metadata:
       labels:
         {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
-        app.kubernetes.io/app: {{ .Values.idIndexApi.name }}
+       app.kubernetes.io/component: {{ .Values.idIndexApi.name }}
     spec:
       containers:
         - name: id-index-api

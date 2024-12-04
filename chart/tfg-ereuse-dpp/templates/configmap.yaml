@@ -11,4 +11,4 @@ data:
  NODE_IP: "http://{{ .Release.Name }}-{{ .Values.blockchainNode.name }}:{{ .Values.blockchainNode.service.port }}"
  ID_INDEX: "http://{{ .Release.Name }}-{{ .Values.idIndexApi.name }}:{{ .Values.idIndexApi.service.port }}"
  #VERAMO_URL: "http://{{ .Release.Name }}-veramo-api:3016"
- #API_CONNECTOR_URL: "http://{{ .Release.Name }}-api-connector:3010"
+ API_CONNECTOR_URL: "http://{{ .Release.Name }}-{{ .Values.apiConnector.name }}:{{ .Values.apiConnector.service.port }}"

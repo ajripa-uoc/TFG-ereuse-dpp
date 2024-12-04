@@ -125,6 +125,7 @@ affinity: {}
 # Global configuration for all resources
 global:
   imagePullPolicy: Always
+  sharedPath: /shared
 
 # Environment variables used by the application
 # They are stored in a ConfigMap and accessed by the application
@@ -173,5 +174,26 @@ blockchainNode:
   service:
     type: ClusterIP
     port: 8545
+
+# api-connector
+apiConnector:
+  replicaCount: 1
+  name: api-connector
+  image:
+    repository: ""
+    tag: ""
+
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: http
+
+  service:
+    type: ClusterIP
+    port: 3010
 
 
