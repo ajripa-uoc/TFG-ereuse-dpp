@@ -9,12 +9,12 @@ spec:
   selector:
     matchLabels:
       {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
-     app.kubernetes.io/component: {{ .Values.apiConnector.name }}
+      app.kubernetes.io/component: {{ .Values.apiConnector.name }}
   template:
     metadata:
       labels:
         {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
-       app.kubernetes.io/component: {{ .Values.apiConnector.name }}
+        app.kubernetes.io/component: {{ .Values.apiConnector.name }}
     spec:
       containers:
         - name: id-index-api
@@ -32,8 +32,8 @@ spec:
             {{- toYaml .Values.apiConnector.readinessProbe | nindent 12 }}
           volumeMounts:
             - name: shared-storage
-              mountPath: {{ Values.global.sharedStorage.mountPath }}
-        volumes:
-          - name: shared-storage
-            persistentVolumeClaim:
-              claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
+              mountPath: {{ .Values.global.sharedStorage.mountPath }}
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}

@@ -125,8 +125,11 @@ affinity: {}
 # Global configuration for all resources
 global:
   imagePullPolicy: Always
-  sharedPath: /shared
 
+  sharedStorage:
+    name: shared-storage
+    storageClassName: efs
+    mountPath: /shared
 # Environment variables used by the application
 # They are stored in a ConfigMap and accessed by the application
 config:
