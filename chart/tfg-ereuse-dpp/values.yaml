@@ -224,4 +224,27 @@ veramoApi:
     type: ClusterIP
     port: 3016
 
+# did-resolver
+didResolver:
+  replicaCount: 1
+  name: did-resolver
+  image:
+    repository: ""
+    tag: ""
+
+  livenessProbe:
+    initialDelaySeconds: 120
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    initialDelaySeconds: 120
+    httpGet:
+      path: /
+      port: http
+
+  service:
+    type: ClusterIP
+    port: 3011
+
 

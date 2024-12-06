@@ -17,3 +17,8 @@ veramoApi:
   image:
     repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/veramo-api"
     tag: "latest"
+
+didResolver:
+  image:
+    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/did-resolver"
+    tag: "latest"

@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.didResolver.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.didResolver.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.didResolver.name }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.didResolver.name }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.didResolver.image.repository }}:{{ .Values.didResolver.image.tag }}"
+          imagePullPolicy: {{ .Values.didResolver.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.didResolver.service.port }}
+              name: http
+          envFrom:
+            - configMapRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+          livenessProbe:
+            {{- toYaml .Values.didResolver.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.didResolver.readinessProbe | nindent 12 }}
