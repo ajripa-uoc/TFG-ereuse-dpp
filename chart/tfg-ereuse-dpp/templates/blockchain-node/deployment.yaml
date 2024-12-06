@@ -35,7 +35,7 @@ spec:
             {{- toYaml .Values.blockchainNode.readinessProbe | nindent 12 }}
           volumeMounts:
             - name: shared-storage
-              mountPath: /home/node/veramoApi/shared
+              mountPath: {{ .Values.global.sharedStorage.mountPath }}
       volumes:
         - name: shared-storage
           persistentVolumeClaim:
