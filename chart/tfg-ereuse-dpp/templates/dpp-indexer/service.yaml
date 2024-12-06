@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.dppIndexer.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.dppIndexer.service.type }}
+  ports:
+    - port: {{ .Values.dppIndexer.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ .Values.dppIndexer.name }}

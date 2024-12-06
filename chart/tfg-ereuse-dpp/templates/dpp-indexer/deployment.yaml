@@ -1,38 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.apiConnector.name }}
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.dppIndexer.name }}
   labels:
     {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
 spec:
-  replicas: {{ .Values.apiConnector.replicaCount }}
+  replicas: {{ .Values.dppIndexer.replicaCount }}
   selector:
     matchLabels:
       {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
-      app.kubernetes.io/component: {{ .Values.apiConnector.name }}
+      app.kubernetes.io/component: {{ .Values.dppIndexer.name }}
   template:
     metadata:
       labels:
         {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
-        app.kubernetes.io/component: {{ .Values.apiConnector.name }}
+        app.kubernetes.io/component: {{ .Values.dppIndexer.name }}
     spec:
       containers:
         - name: id-index-api
-          image: "{{ .Values.apiConnector.image.repository }}:{{ .Values.apiConnector.image.tag }}"
-          imagePullPolicy: {{ .Values.apiConnector.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          image: "{{ .Values.dppIndexer.image.repository }}:{{ .Values.dppIndexer.image.tag }}"
+          imagePullPolicy: {{ .Values.dppIndexer.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:
-            - containerPort: {{ .Values.apiConnector.service.port }}
+            - containerPort: {{ .Values.dppIndexer.service.port }}
               name: http
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
           livenessProbe:
-            {{- toYaml .Values.apiConnector.livenessProbe | nindent 12 }}
+            {{- toYaml .Values.dppIndexer.livenessProbe | nindent 12 }}
           readinessProbe:
-            {{- toYaml .Values.apiConnector.readinessProbe | nindent 12 }}
+            {{- toYaml .Values.dppIndexer.readinessProbe | nindent 12 }}
           volumeMounts:
             - name: shared-storage
-              mountPath: {{ .Values.apiConnector.sharedStorage.mountPath }}
+              mountPath: /home/node/observerModule/shared
       volumes:
         - name: shared-storage
           persistentVolumeClaim:

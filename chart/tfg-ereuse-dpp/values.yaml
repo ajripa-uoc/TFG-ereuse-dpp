@@ -201,6 +201,9 @@ apiConnector:
     type: ClusterIP
     port: 3010
 
+  sharedStorage:
+    mountPath: /home/node/app/shared
+
 # veramo-api
 veramoApi:
   replicaCount: 1
@@ -224,6 +227,9 @@ veramoApi:
     type: ClusterIP
     port: 3016
 
+  sharedStorage:
+    mountPath: /home/node/veramoApi/shared
+
 # did-resolver
 didResolver:
   replicaCount: 1
@@ -245,4 +251,27 @@ didResolver:
     type: ClusterIP
     port: 3011
 
+# dpp-indexer
+dppIndexer:
+  replicaCount: 1
+  name: dpp-indexer
+  image:
+    repository: ""
+    tag: ""
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+  service:
+    type: ClusterIP
+    port: 3014
+
+  sharedStorage:
+    mountPath: /home/node/observerModule/shared
 
