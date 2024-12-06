@@ -4,6 +4,10 @@ var router = express.Router();
 
 router
 
+.get("/healthz", (req, res) => {
+    res.status(200).json({ status: 'healthy' });
+})
+
 .post("/verify", async (req, res, next) => {
     var credential = req.body.credential
     var check = await verify(credential)

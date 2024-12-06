@@ -212,12 +212,12 @@ veramoApi:
   livenessProbe:
     initialDelaySeconds: 120
     httpGet:
-      path: /
+      path: /healthz
       port: http
   readinessProbe:
     initialDelaySeconds: 120
     httpGet:
-      path: /
+      path: /healthz
       port: http
 
   service:
