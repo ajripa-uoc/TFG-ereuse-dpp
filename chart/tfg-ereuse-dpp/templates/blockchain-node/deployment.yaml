@@ -33,10 +33,3 @@ spec:
             {{- toYaml .Values.blockchainNode.livenessProbe | nindent 12 }}
           readinessProbe:
             {{- toYaml .Values.blockchainNode.readinessProbe | nindent 12 }}
-          volumeMounts:
-            - name: shared-storage
-              mountPath: {{ .Values.global.sharedStorage.mountPath }}
-      volumes:
-        - name: shared-storage
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
