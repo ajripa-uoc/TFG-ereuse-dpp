@@ -27,3 +27,8 @@ dppIndexer:
   image:
     repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/dpp-indexer"
     tag: "latest"
+
+devicehubDjango:
+  image:
+    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/devicehub-django"
+    tag: "latest"

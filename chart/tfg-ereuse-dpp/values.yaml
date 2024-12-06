@@ -137,6 +137,8 @@ config:
   ETH_CLIENT: besu
   ETH_PRIV_KEY: 807118c237e01677f0522f9ca50535b1984481ea2e09115197934a9cd73ab8c1
   CHAIN_ID: 457
+  ID_FEDERATED: DH1
+  API_DLT_TOKEN: zD9KXy1UaKCL3IL.8E7r5EQejlwhKydGdkPPGUvD1EKHf7q1uR5ENTAcE8jjoSehOOkxwcov4nzta349
 
 # id-index-api
 idIndexApi:
@@ -275,3 +277,26 @@ dppIndexer:
   sharedStorage:
     mountPath: /home/node/observerModule/shared
 
+# devicehub-django
+dppIndexer:
+  replicaCount: 1
+  name: devicehub-django
+  image:
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub-django"
+    tag: "latest"
+
+  livenessProbe:
+    httpGet:
+      path: /healthz
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /healthz
+      port: http
+
+  service:
+    type: ClusterIP
+    port: 8000
+
+  sharedStorage:
+    mountPath: /shared

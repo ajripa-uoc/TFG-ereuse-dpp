@@ -12,3 +12,7 @@ data:
  ID_INDEX: "http://{{ .Release.Name }}-{{ .Values.idIndexApi.name }}:{{ .Values.idIndexApi.service.port }}"
  VERAMO_URL: "http://{{ .Release.Name }}-veramo-api:{{ .Values.veramoApi.service.port }}"
  API_CONNECTOR_URL: "http://{{ .Release.Name }}-{{ .Values.apiConnector.name }}:{{ .Values.apiConnector.service.port }}"
+ API_DLT: "http://{{ .Release.Name }}-{{ .Values.apiConnector.name }}:{{ .Values.apiConnector.service.port }}"
+ API_RESOLVER: "http://{{ .Release.Name }}-{{ .Values.idIndexApi.name }}:{{ .Values.idIndexApi.service.port }}"
+ ID_FEDERATED: {{ .Values.config.ID_FEDERATED }}
+ API_DLT_TOKEN: {{ .Values.config.API_DLT_TOKEN }}
