@@ -143,8 +143,8 @@ idIndexApi:
   replicaCount: 1
   name: id-index-api
   image:
-    repository: ""
-    tag: ""
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/id-index-api"
+    tag: "latest"
 
   livenessProbe:
     httpGet:
@@ -164,8 +164,8 @@ blockchainNode:
   replicaCount: 1
   name: blockchain-node
   image:
-    repository: ""
-    tag: ""
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/blockchain-node"
+    tag: "latest"
 
   livenessProbe:
     tcpSocket:
@@ -183,8 +183,8 @@ apiConnector:
   replicaCount: 1
   name: api-connector
   image:
-    repository: ""
-    tag: ""
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/api-connector"
+    tag: "latest"
 
   livenessProbe:
     initialDelaySeconds: 120
@@ -209,8 +209,8 @@ veramoApi:
   replicaCount: 1
   name: veramo-api
   image:
-    repository: ""
-    tag: ""
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/veramo-api"
+    tag: "latest"
 
   livenessProbe:
     initialDelaySeconds: 120
@@ -235,8 +235,8 @@ didResolver:
   replicaCount: 1
   name: did-resolver
   image:
-    repository: ""
-    tag: ""
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/did-resolver"
+    tag: "latest"
 
   livenessProbe:
     httpGet:
@@ -256,8 +256,8 @@ dppIndexer:
   replicaCount: 1
   name: dpp-indexer
   image:
-    repository: ""
-    tag: ""
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/dpp-indexer"
+    tag: "latest"
 
   livenessProbe:
     httpGet:
