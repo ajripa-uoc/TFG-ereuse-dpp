@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.veramoApi.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  type: {{ .Values.veramoApi.service.type }}
+  ports:
+    - port: {{ .Values.veramoApi.service.port }}
+      targetPort: http
+      protocol: TCP
+      name: http
+  selector:
+    {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 4 }}
+    app.kubernetes.io/component: {{ .Values.veramoApi.name }}

@@ -188,6 +188,7 @@ apiConnector:
     tag: ""
 
   livenessProbe:
+    # initialDelaySeconds is used to wait for the veramo-api to start
     initialDelaySeconds: 120
     httpGet:
       path: /
@@ -201,5 +202,26 @@ apiConnector:
   service:
     type: ClusterIP
     port: 3010
+
+# veramo-api
+veramoApi:
+  replicaCount: 1
+  name: veramo-api
+  image:
+    repository: ""
+    tag: ""
+
+  livenessProbe:
+    httpGet:
+      path: /
+      port: http
+  readinessProbe:
+    httpGet:
+      path: /
+      port: http
+
+  service:
+    type: ClusterIP
+    port: 3016
 
 

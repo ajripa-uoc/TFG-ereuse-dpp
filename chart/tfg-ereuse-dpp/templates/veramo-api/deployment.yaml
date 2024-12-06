@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.veramoApi.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.veramoApi.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.veramoApi.name }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.veramoApi.name }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.veramoApi.image.repository }}:{{ .Values.veramoApi.image.tag }}"
+          imagePullPolicy: {{ .Values.veramoApi.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.veramoApi.service.port }}
+              name: http
+          envFrom:
+            - configMapRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+          livenessProbe:
+            {{- toYaml .Values.veramoApi.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.veramoApi.readinessProbe | nindent 12 }}
