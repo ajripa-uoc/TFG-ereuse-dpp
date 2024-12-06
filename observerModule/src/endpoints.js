@@ -36,6 +36,11 @@ const fuseOptions = {
 
 router
 
+// Health check endpoints
+.get("/healthz", (req, res) => {
+    res.status(200).json({ status: 'healthy' });
+})
+
 .get('/search', (req, res, next) => {
     var query = req.query.query
     try {

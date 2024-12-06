@@ -261,11 +261,11 @@ dppIndexer:
 
   livenessProbe:
     httpGet:
-      path: /
+      path: /healthz
       port: http
   readinessProbe:
     httpGet:
-      path: /
+      path: /healthz
       port: http
 
   service:
