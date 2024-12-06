@@ -23,6 +23,9 @@ spec:
           ports:
             - containerPort: {{ .Values.dppIndexer.service.port }}
               name: http
+          env:
+            - name: HTTP_PORT
+              value: {{ .Values.dppIndexer.service.port }}
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
