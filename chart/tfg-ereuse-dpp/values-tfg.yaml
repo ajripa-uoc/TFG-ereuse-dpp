@@ -34,7 +34,7 @@ devicehubDjango:
     tag: "latest"
   config:
     DOMAIN: ereuse-dpp.ajripa.click
-    ALLOWED_HOSTS: "*"
+    ALLOWED_HOSTS: ['*']
   ingress:
     enabled: true
     className: alb
