@@ -25,10 +25,7 @@ spec:
               name: http
           env:
             - name: MINING_INTERVAL
-              valueFrom:
-                configMapKeyRef:
-                  name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
-                  key: MINING_INTERVAL
+              value: {{ .Values.blockchainNode.config.MINING_INTERVAL }}
           livenessProbe:
             {{- toYaml .Values.blockchainNode.livenessProbe | nindent 12 }}
           readinessProbe:

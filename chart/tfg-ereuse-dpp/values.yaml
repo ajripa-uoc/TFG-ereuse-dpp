@@ -133,7 +133,6 @@ global:
 # Environment variables used by the application
 # They are stored in a ConfigMap and accessed by the application
 config:
-  MINING_INTERVAL: 1000
   ETH_CLIENT: besu
   ETH_PRIV_KEY: 807118c237e01677f0522f9ca50535b1984481ea2e09115197934a9cd73ab8c1
   CHAIN_ID: 457
@@ -179,6 +178,9 @@ blockchainNode:
   service:
     type: ClusterIP
     port: 8545
+
+  config:
+    MINING_INTERVAL: 1000
 
 # api-connector
 apiConnector:
@@ -284,6 +286,10 @@ devicehubDjango:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub-django"
     tag: "latest"
+
+  config:
+    DPP_MODULE: y
+    DPP_SHARED: /shared
 
   livenessProbe:
     httpGet:
