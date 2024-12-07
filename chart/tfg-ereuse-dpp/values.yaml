@@ -297,13 +297,11 @@ devicehubDjango:
     ALLOWED_HOSTS: 127.0.0.1,localhost
 
   livenessProbe:
-    httpGet:
-      path: /healthz
-      port: http
+    tcpSocket:
+      port: 8000
   readinessProbe:
-    httpGet:
-      path: /healthz
-      port: http
+    tcpSocket:
+      port: 8000
 
   service:
     type: ClusterIP
