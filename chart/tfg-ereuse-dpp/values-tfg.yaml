@@ -1,34 +1,52 @@
 idIndexApi:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/id-index-api"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/id-index-api"
     tag: "latest"
 
 blockchainNode:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/blockchain-node"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/blockchain-node"
     tag: "latest"
 
 apiConnector:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/api-connector"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/api-connector"
     tag: "latest"
 
 veramoApi:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/veramo-api"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/veramo-api"
     tag: "latest"
 
 didResolver:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/did-resolver"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/did-resolver"
     tag: "latest"
 
 dppIndexer:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/dpp-indexer"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/dpp-indexer"
     tag: "latest"
 
 devicehubDjango:
   image:
-    repository: "986740191892.dkr.ecr.eu-west-1.amazonaws.com/tfg-ereuse-dpp/devicehub-django"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub-django"
     tag: "latest"
+  ingress:
+    enabled: true
+    className: alb
+    annotations:
+    kubernetes.io/ingress.class: alb
+    alb.ingress.kubernetes.io/group.name: shared-public
+    alb.ingress.kubernetes.io/scheme: internet-facing
+    alb.ingress.kubernetes.io/target-type: ip
+    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+    alb.ingress.kubernetes.io/backend-protocol: HTTP
+    alb.ingress.kubernetes.io/healthcheck-port: '3000'
+    external-dns.alpha.kubernetes.io/hostname: ereuse-dpp.ajripa.click
+    hosts:
+      - host: ereuse-dpp.ajripa.click
+      paths:
+        - path: /*
+          pathType: ImplementationSpecific
+
