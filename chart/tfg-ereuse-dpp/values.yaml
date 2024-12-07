@@ -258,7 +258,7 @@ devicehub:
     INIT_PASSWD: 1234
 
   healthcheck:
-    path: /login
+    path: /login/
 
   service:
     type: ClusterIP
