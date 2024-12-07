@@ -9,7 +9,7 @@ metadata:
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
-  external-dns.alpha.kubernetes.io/hostname: {{ .Values.global.domain }}
+    external-dns.alpha.kubernetes.io/hostname: {{ .Values.global.domain }}
 spec:
   {{- with .Values.devicehub.ingress.className }}
   ingressClassName: {{ . }}
