@@ -34,7 +34,6 @@ devicehubDjango:
     tag: "latest"
   config:
     DOMAIN: ereuse-dpp.ajripa.click
-    ALLOWED_HOSTS: "*"
   ingress:
     enabled: true
     className: alb
@@ -45,7 +44,7 @@ devicehubDjango:
       alb.ingress.kubernetes.io/target-type: ip
       alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
       alb.ingress.kubernetes.io/backend-protocol: HTTP
-      alb.ingress.kubernetes.io/healthcheck-port: '3000'
+      alb.ingress.kubernetes.io/healthcheck-port: '8000'
     external-dns.alpha.kubernetes.io/hostname: ereuse-dpp.ajripa.click
     hosts:
       - host: ereuse-dpp.ajripa.click
