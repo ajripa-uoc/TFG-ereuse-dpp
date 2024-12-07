@@ -36,6 +36,8 @@ spec:
               value: "{{ .Values.devicehubDjango.config.INIT_USER }}"
             - name: INIT_PASSWD
               value: "{{ .Values.devicehubDjango.config.INIT_PASSWD }}"
+            - name: ALLOWED_HOSTS
+              value: "{{ .Values.devicehubDjango.config.ALLOWED_HOSTS }}"
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap

@@ -294,6 +294,7 @@ devicehubDjango:
     INIT_ORG: example-org
     INIT_USER: user@example.org
     INIT_PASSWD: 1234
+    ALLOWED_HOSTS: *
 
   livenessProbe:
     httpGet:
