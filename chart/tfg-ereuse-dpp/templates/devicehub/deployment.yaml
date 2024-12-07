@@ -25,13 +25,23 @@ spec:
               name: http
           envFrom:
             - configMapRef:
-                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
             - configMapRef:
-                name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.devicehub.name }}-configmap
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.devicehub.name }}-config
           livenessProbe:
-            {{- toYaml .Values.devicehub.livenessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.devicehub.healthcheck.path }}
+              port: {{ .Values.devicehub.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.global.domain }}
           readinessProbe:
-            {{- toYaml .Values.devicehub.readinessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.devicehub.healthcheck.path }}
+              port: {{ .Values.devicehub.service.port }}
+              httpHeaders:
+                - name: Host
+                  value: {{ .Values.global.domain }}
           volumeMounts:
             - name: shared-storage
               mountPath: /home/node/observerModule/shared

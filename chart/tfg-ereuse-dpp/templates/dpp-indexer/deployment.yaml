@@ -30,9 +30,13 @@ spec:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
           livenessProbe:
-            {{- toYaml .Values.dppIndexer.livenessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.dppIndexer.healthcheck.path }}
+              port: {{ .Values.dppIndexer.service.port }}
           readinessProbe:
-            {{- toYaml .Values.dppIndexer.readinessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.dppIndexer.healthcheck.path }}
+              port: {{ .Values.dppIndexer.service.port }}
           volumeMounts:
             - name: shared-storage
               mountPath: /home/node/observerModule/shared

@@ -27,6 +27,10 @@ spec:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
           livenessProbe:
-            {{- toYaml .Values.didResolver.livenessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.didResolver.healthcheck.path }}
+              port: {{ .Values.didResolver.service.port }}
           readinessProbe:
-            {{- toYaml .Values.didResolver.readinessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.didResolver.healthcheck.path }}
+              port: {{ .Values.didResolver.service.port }}

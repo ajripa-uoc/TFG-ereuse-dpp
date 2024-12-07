@@ -27,9 +27,15 @@ spec:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
           livenessProbe:
-            {{- toYaml .Values.veramoApi.livenessProbe | nindent 12 }}
+            initialDelaySeconds: 120
+            httpGet:
+              path: {{ .Values.veramoApi.healthcheck.path }}
+              port: {{ .Values.veramoApi.service.port }}
           readinessProbe:
-            {{- toYaml .Values.veramoApi.readinessProbe | nindent 12 }}
+            initialDelaySeconds: 120
+            httpGet:
+              path: {{ .Values.veramoApi.healthcheck.path }}
+              port: {{ .Values.veramoApi.service.port }}
           volumeMounts:
             - name: shared-storage
               mountPath: {{ .Values.veramoApi.sharedStorage.mountPath }}

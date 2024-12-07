@@ -24,6 +24,10 @@ spec:
             - containerPort: {{ .Values.idIndexApi.service.port }}
               name: http
           livenessProbe:
-            {{- toYaml .Values.idIndexApi.livenessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.idIndexApi.healthcheck.path }}
+              port: http
           readinessProbe:
-            {{- toYaml .Values.idIndexApi.readinessProbe | nindent 12 }}
+            httpGet:
+              path: {{ .Values.idIndexApi.healthcheck.path }}
+              port: http

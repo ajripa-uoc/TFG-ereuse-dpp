@@ -27,6 +27,8 @@ spec:
             - name: MINING_INTERVAL
               value: "{{ .Values.blockchainNode.config.MINING_INTERVAL }}"
           livenessProbe:
-            {{- toYaml .Values.blockchainNode.livenessProbe | nindent 12 }}
+            tcpSocket:
+              port: {{ .Values.blockchainNode.service.port }}
           readinessProbe:
-            {{- toYaml .Values.blockchainNode.readinessProbe | nindent 12 }}
+            tcpSocket:
+              port: {{ .Values.blockchainNode.service.port }}
