@@ -24,7 +24,10 @@ spec:
             - containerPort: {{ .Values.devicehubDjango.service.port }}
               name: http
           env:
-            {{- toYaml .Values.devicehubDjango.config | nindent 12 }}
+            - name: DPP_MODULE
+              value: "{{ .Values.devicehubDjango.config.DPP_MODULE }}"
+            - name: DPP_SHARED
+              value: "{{ .Values.devicehubDjango.config.DPP_SHARED }}"
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
