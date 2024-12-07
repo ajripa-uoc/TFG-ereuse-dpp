@@ -17,6 +17,7 @@ RUN adduser --home /opt/devicehub-django -u 1000 app
 
 WORKDIR /opt/devicehub-django
 
+COPY example/snapshots /mnt/snapshots
 COPY . .
 
 # reduce size (python specifics) -> src https://stackoverflow.com/questions/74616667/removing-pip-cache-after-installing-dependencies-in-docker-image

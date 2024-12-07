@@ -29,19 +29,23 @@ spec:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.devicehub.name }}-config
           livenessProbe:
-            httpGet:
-              path: {{ .Values.devicehub.healthcheck.path }}
+            tcpSocket:
               port: {{ .Values.devicehub.service.port }}
-              httpHeaders:
-                - name: Host
-                  value: {{ .Values.global.domain }}
+            # httpGet:
+            #   path: {{ .Values.devicehub.healthcheck.path }}
+            #   port: {{ .Values.devicehub.service.port }}
+            #   httpHeaders:
+            #     - name: Host
+            #       value: {{ .Values.global.domain }}
           readinessProbe:
-            httpGet:
-              path: {{ .Values.devicehub.healthcheck.path }}
+            tcpSocket:
               port: {{ .Values.devicehub.service.port }}
-              httpHeaders:
-                - name: Host
-                  value: {{ .Values.global.domain }}
+            # httpGet:
+            #   path: {{ .Values.devicehub.healthcheck.path }}
+            #   port: {{ .Values.devicehub.service.port }}
+            #   httpHeaders:
+            #     - name: Host
+            #       value: {{ .Values.global.domain }}
           volumeMounts:
             - name: shared-storage
               mountPath: /home/node/observerModule/shared
