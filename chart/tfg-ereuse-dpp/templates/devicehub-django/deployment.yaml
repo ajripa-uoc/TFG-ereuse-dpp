@@ -28,6 +28,8 @@ spec:
               value: "{{ .Values.devicehubDjango.config.DPP_MODULE }}"
             - name: DPP_SHARED
               value: "{{ .Values.devicehubDjango.config.DPP_SHARED }}"
+            - name: DOMAIN
+              value: "{{ .Values.devicehubDjango.config.DOMAIN }}"
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap

@@ -290,7 +290,7 @@ devicehubDjango:
   config:
     DPP_MODULE: y
     DPP_SHARED: /shared
-
+    DOMAIN: localhost
   livenessProbe:
     httpGet:
       path: /healthz
