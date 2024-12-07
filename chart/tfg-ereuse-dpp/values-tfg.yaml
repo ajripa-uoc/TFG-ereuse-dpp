@@ -36,17 +36,17 @@ devicehubDjango:
     enabled: true
     className: alb
     annotations:
-    kubernetes.io/ingress.class: alb
-    alb.ingress.kubernetes.io/group.name: shared-public
-    alb.ingress.kubernetes.io/scheme: internet-facing
-    alb.ingress.kubernetes.io/target-type: ip
-    alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
-    alb.ingress.kubernetes.io/backend-protocol: HTTP
-    alb.ingress.kubernetes.io/healthcheck-port: '3000'
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/group.name: shared-public
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+      alb.ingress.kubernetes.io/backend-protocol: HTTP
+      alb.ingress.kubernetes.io/healthcheck-port: '3000'
     external-dns.alpha.kubernetes.io/hostname: ereuse-dpp.ajripa.click
     hosts:
       - host: ereuse-dpp.ajripa.click
-      paths:
+        paths:
         - path: /*
           pathType: ImplementationSpecific
 
