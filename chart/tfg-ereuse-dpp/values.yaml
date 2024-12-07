@@ -250,7 +250,8 @@ devicehub:
 
   config:
     DEBUG: true
-    DPP_MODULE: y
+    DEMO: true
+    DPP_MODULE: n
     DPP_SHARED: /shared
     INIT_ORG: example-org
     INIT_USER: user@example.org
