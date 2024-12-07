@@ -10,4 +10,3 @@ data:
  {{- end }}
  DOMAIN: {{ .Values.global.domain }}
  ALLOWED_HOSTS: localhost,localhost:8000,127.0.0.1,{{ .Values.global.domain }},{{ .Values.global.domain }}:8000
- DEBUG: true
