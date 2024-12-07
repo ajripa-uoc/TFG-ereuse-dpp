@@ -25,20 +25,14 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    {{- range .Values.devicehub.ingress.hosts }}
     - host: {{ $.Values.global.domain | quote }}
       http:
         paths:
-          {{- range .paths }}
-          - path: {{ .path }}
-            {{- with .pathType }}
-            pathType: {{ . }}
-            {{- end }}
+          - path: /*
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: {{ include "tfg-ereuse-dpp.fullname" $ }}-{{ $.Values.devicehub.name }}
                 port:
                   number: {{ $.Values.devicehub.service.port }}
-          {{- end }}
-    {{- end }}
 {{- end }}
