@@ -288,9 +288,13 @@ devicehubDjango:
     tag: "latest"
 
   config:
-    DPP_MODULE: y
+    DPP_MODULE: n
     DPP_SHARED: /shared
     DOMAIN: localhost
+    INIT_ORG: example-org
+    INIT_USER: user@example.org
+    INIT_PASSWD: 1234
+
   livenessProbe:
     httpGet:
       path: /healthz

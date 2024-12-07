@@ -30,6 +30,12 @@ spec:
               value: "{{ .Values.devicehubDjango.config.DPP_SHARED }}"
             - name: DOMAIN
               value: "{{ .Values.devicehubDjango.config.DOMAIN }}"
+            - name: INIT_ORG
+              value: "{{ .Values.devicehubDjango.config.INIT_ORG }}"
+            - name: INIT_USER
+              value: "{{ .Values.devicehubDjango.config.INIT_USER }}"
+            - name: INIT_PASSWD
+              value: "{{ .Values.devicehubDjango.config.INIT_PASSWD }}"
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
