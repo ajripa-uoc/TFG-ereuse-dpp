@@ -1,0 +1,41 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.devicehub.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.devicehub.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.devicehub.name }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.devicehub.name }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.devicehub.image.repository }}:{{ .Values.devicehub.image.tag }}"
+          imagePullPolicy: {{ .Values.devicehub.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.devicehub.service.port }}
+              name: http
+          envFrom:
+            - configMapRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+            - configMapRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.devicehub.name }}-configmap
+          livenessProbe:
+            {{- toYaml .Values.devicehub.livenessProbe | nindent 12 }}
+          readinessProbe:
+            {{- toYaml .Values.devicehub.readinessProbe | nindent 12 }}
+          volumeMounts:
+            - name: shared-storage
+              mountPath: /home/node/observerModule/shared
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}

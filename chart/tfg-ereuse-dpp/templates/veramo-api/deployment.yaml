@@ -25,7 +25,7 @@ spec:
               name: http
           envFrom:
             - configMapRef:
-                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
           livenessProbe:
             {{- toYaml .Values.veramoApi.livenessProbe | nindent 12 }}
           readinessProbe:

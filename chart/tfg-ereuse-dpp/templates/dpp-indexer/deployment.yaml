@@ -28,7 +28,7 @@ spec:
               value: "{{ .Values.dppIndexer.service.port }}"
           envFrom:
             - configMapRef:
-                name: {{ include "tfg-ereuse-dpp.fullname" . }}-configmap
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
           livenessProbe:
             {{- toYaml .Values.dppIndexer.livenessProbe | nindent 12 }}
           readinessProbe:

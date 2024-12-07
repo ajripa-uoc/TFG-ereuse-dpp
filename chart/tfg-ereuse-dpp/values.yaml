@@ -279,10 +279,10 @@ dppIndexer:
   sharedStorage:
     mountPath: /home/node/observerModule/shared
 
-# devicehub-django
-devicehubDjango:
+# devicehub
+devicehub:
   replicaCount: 1
-  name: devicehub-django
+  name: devicehub
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub-django"
     tag: "latest"
