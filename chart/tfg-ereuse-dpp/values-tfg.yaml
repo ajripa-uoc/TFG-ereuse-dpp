@@ -66,3 +66,7 @@ search:
       alb.ingress.kubernetes.io/backend-protocol: HTTP
       alb.ingress.kubernetes.io/healthcheck-port: '3000'
 
+createOperatorUser:
+  image:
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/create-operator-user"
+    tag: "latest"

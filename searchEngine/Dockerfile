@@ -10,5 +10,8 @@ RUN npm install
 EXPOSE 3000
 WORKDIR /home/node/searchEngine
 
+COPY --chown=node:node src src
+COPY --chown=node:node public public
+
 COPY entrypoint.sh .
 CMD ["./entrypoint.sh"]

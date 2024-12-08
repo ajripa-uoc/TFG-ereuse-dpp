@@ -297,7 +297,8 @@ search:
     # Rest of the config is in the configmap.
     # The APIs urls are build from the fullname of the release and the name of the service.
     DISABLE_ESLINT_PLUGIN: true
-    REACT_APP_CONNECTOR_API_TOKEN: "Aw0nnxI8mJ81TiY.jDCsrUlUjh9w1T4O44HcEFGNOkZ3gWCjFGb7czaJliZqWXPaWJXyP0ADTwZ8M8gE"
+    # This value is set in the operator-token.txt file in the shared volume.
+    #REACT_APP_CONNECTOR_API_TOKEN: "Aw0nnxI8mJ81TiY.jDCsrUlUjh9w1T4O44HcEFGNOkZ3gWCjFGb7czaJliZqWXPaWJXyP0ADTwZ8M8gE"
 
   healthcheck:
     path: /
@@ -324,3 +325,14 @@ search:
 
   sharedStorage:
     mountPath: /home/node/searchEngine/shared
+
+# create-operator-user
+createOperatorUser:
+  replicaCount: 1
+  name: create-operator-user
+  image:
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/create-operator-user"
+    tag: "latest"
+
+  sharedStorage:
+    mountPath: /home/node/app/shared
