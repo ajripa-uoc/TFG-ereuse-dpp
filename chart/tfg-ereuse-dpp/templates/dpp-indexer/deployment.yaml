@@ -39,7 +39,7 @@ spec:
               port: {{ .Values.dppIndexer.service.port }}
           volumeMounts:
             - name: shared-storage
-              mountPath: /home/node/observerModule/shared
+              mountPath: {{ .Values.dppIndexer.sharedStorage.mountPath }}
       volumes:
         - name: shared-storage
           persistentVolumeClaim:

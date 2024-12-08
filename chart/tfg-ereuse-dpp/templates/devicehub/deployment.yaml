@@ -44,7 +44,7 @@ spec:
                   value: {{ .Values.global.domain }}
           volumeMounts:
             - name: shared-storage
-              mountPath: /shared
+              mountPath: {{ .Values.devicehub.sharedStorage.mountPath }}
       volumes:
         - name: shared-storage
           persistentVolumeClaim:
