@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.search.name }}-config
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+data:
+ {{- range $key, $value := .Values.search.config }}
+ {{ $key }}: {{ $value | quote }}
+ {{- end }}
+ REACT_APP_CONNECTOR_API: "http://{{ .Release.Name }}-{{ .Values.apiConnector.name }}:{{ .Values.apiConnector.service.port }}"
+ REACT_APP_DPP_INDEXER: "http://{{ .Release.Name }}-{{ .Values.dppIndexer.name }}:{{ .Values.dppIndexer.service.port }}"
+ REACT_APP_EREUSE_DID_RESOLVER: "http://{{ .Release.Name }}-{{ .Values.idIndexApi.name }}:{{ .Values.idIndexApi.service.port }}"
+ REACT_APP_ID_INDEX_API: "http://{{ .Release.Name }}-{{ .Values.idIndexApi.name }}:{{ .Values.idIndexApi.service.port }}"
+

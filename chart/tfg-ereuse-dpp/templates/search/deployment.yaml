@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.search.name }}
+  labels:
+    {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
+spec:
+  replicas: {{ .Values.search.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "tfg-ereuse-dpp.selectorLabels" . | nindent 6 }}
+      app.kubernetes.io/component: {{ .Values.search.name }}
+  template:
+    metadata:
+      labels:
+        {{- include "tfg-ereuse-dpp.labels" . | nindent 8 }}
+        app.kubernetes.io/component: {{ .Values.search.name }}
+    spec:
+      containers:
+        - name: id-index-api
+          image: "{{ .Values.search.image.repository }}:{{ .Values.search.image.tag }}"
+          imagePullPolicy: {{ .Values.search.image.pullPolicy | default .Values.global.imagePullPolicy }}
+          ports:
+            - containerPort: {{ .Values.search.service.port }}
+              name: http
+          envFrom:
+            - configMapRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.search.name }}-config
+          livenessProbe:
+            httpGet:
+              path: {{ .Values.search.healthcheck.path }}
+              port: {{ .Values.search.service.port }}
+          readinessProbe:
+            httpGet:
+              path: {{ .Values.search.healthcheck.path }}
+              port: {{ .Values.search.service.port }}
+          volumeMounts:
+            - name: shared-storage
+              mountPath: {{ .Values.search.sharedStorage.mountPath }}
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
