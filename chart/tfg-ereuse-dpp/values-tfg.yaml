@@ -31,6 +31,18 @@ dppIndexer:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/dpp-indexer"
     tag: "latest"
 
+  ingress:
+    enabled: true
+    className: alb
+    annotations:
+      kubernetes.io/ingress.class: alb
+      alb.ingress.kubernetes.io/group.name: shared-public
+      alb.ingress.kubernetes.io/scheme: internet-facing
+      alb.ingress.kubernetes.io/target-type: ip
+      alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
+      alb.ingress.kubernetes.io/backend-protocol: HTTP
+      alb.ingress.kubernetes.io/healthcheck-port: '3014'
+
 devicehub:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub"
