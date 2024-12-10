@@ -1,0 +1,26 @@
+# templates/init-job.yaml
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "chart.fullname" . }}-{{ .Values.createOperatorUser.name }}
+  annotations:
+    "helm.sh/hook": "pre-install,pre-upgrade"
+    "helm.sh/hook-delete-policy": "before-hook-creation,hook-succeeded"
+    "helm.sh/hook-weight": "0"
+spec:
+  backoffLimit: 6
+  template:
+    spec:
+      restartPolicy: OnFailure
+      containers:
+      - name: create-operator-user
+        image: {{ .Values.createOperatorUser.image.repository }}:{{ .Values.createOperatorUser.image.tag }}
+        imagePullPolicy: {{ .Values.apiConnector.image.pullPolicy | default .Values.global.imagePullPolicy }}
+        command: ["./entrypoint.sh"]
+        volumeMounts:
+          - name: shared-storage
+            mountPath: {{ .Values.createOperatorUser.sharedStorage.mountPath }}
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
