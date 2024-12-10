@@ -8,7 +8,7 @@ data:
  {{- range $key, $value := .Values.config }}
  {{ $key }}: {{ $value | quote }}
  {{- end }}
- NODE_IP: "{{ .Release.Name }}-{{ .Values.blockchainNode.name }}"
+ NODE_IP: "http://{{ .Release.Name }}-{{ .Values.blockchainNode.name }}"
  ID_INDEX: "http://{{ .Release.Name }}-{{ .Values.idIndexApi.name }}:{{ .Values.idIndexApi.service.port }}"
  VERAMO_URL: "http://{{ .Release.Name }}-veramo-api:{{ .Values.veramoApi.service.port }}"
  API_CONNECTOR_URL: "http://{{ .Release.Name }}-{{ .Values.apiConnector.name }}:{{ .Values.apiConnector.service.port }}"
