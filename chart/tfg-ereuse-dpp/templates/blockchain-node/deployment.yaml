@@ -17,7 +17,7 @@ spec:
         app.kubernetes.io/component: {{ .Values.blockchainNode.name }}
     spec:
       containers:
-        - name: id-index-api
+        - name: {{ .Values.blockchainNode.name }}
           image: "{{ .Values.blockchainNode.image.repository }}:{{ .Values.blockchainNode.image.tag }}"
           imagePullPolicy: {{ .Values.blockchainNode.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:

@@ -17,7 +17,7 @@ spec:
         app.kubernetes.io/component: {{ .Values.search.name }}
     spec:
       containers:
-        - name: id-index-api
+        - name: {{ .Values.search.name }}
           image: "{{ .Values.search.image.repository }}:{{ .Values.search.image.tag }}"
           imagePullPolicy: {{ .Values.search.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:

@@ -17,7 +17,7 @@ spec:
         app.kubernetes.io/component: {{ .Values.didResolver.name }}
     spec:
       containers:
-        - name: id-index-api
+        - name: {{ .Values.didResolver.name }}
           image: "{{ .Values.didResolver.image.repository }}:{{ .Values.didResolver.image.tag }}"
           imagePullPolicy: {{ .Values.didResolver.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:

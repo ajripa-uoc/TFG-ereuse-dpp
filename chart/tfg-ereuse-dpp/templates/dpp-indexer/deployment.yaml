@@ -17,7 +17,7 @@ spec:
         app.kubernetes.io/component: {{ .Values.dppIndexer.name }}
     spec:
       containers:
-        - name: id-index-api
+        - name: {{ .Values.dppIndexer.name }}
           image: "{{ .Values.dppIndexer.image.repository }}:{{ .Values.dppIndexer.image.tag }}"
           imagePullPolicy: {{ .Values.dppIndexer.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:

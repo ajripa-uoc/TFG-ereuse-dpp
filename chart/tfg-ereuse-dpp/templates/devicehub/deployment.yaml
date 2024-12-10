@@ -17,7 +17,7 @@ spec:
         app.kubernetes.io/component: {{ .Values.devicehub.name }}
     spec:
       containers:
-        - name: id-index-api
+        - name: {{ .Values.devicehub.name }}
           image: "{{ .Values.devicehub.image.repository }}:{{ .Values.devicehub.image.tag }}"
           imagePullPolicy: {{ .Values.devicehub.image.pullPolicy | default .Values.global.imagePullPolicy }}
           ports:
