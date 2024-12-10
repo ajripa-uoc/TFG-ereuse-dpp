@@ -1,22 +1,22 @@
-{{- if .Values.search.ingress.enabled -}}
+{{- if .Values.dppIndexer.ingress.enabled -}}
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.search.name }}
+  name: {{ include "tfg-ereuse-dpp.fullname" . }}-{{ .Values.dppIndexer.name }}
   labels:
     {{- include "tfg-ereuse-dpp.labels" . | nindent 4 }}
-  {{- with .Values.search.ingress.annotations }}
+  {{- with .Values.dppIndexer.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
   {{- end }}
     external-dns.alpha.kubernetes.io/hostname: {{ .Values.global.domain }}
 spec:
-  {{- with .Values.search.ingress.className }}
+  {{- with .Values.dppIndexer.ingress.className }}
   ingressClassName: {{ . }}
   {{- end }}
-  {{- if .Values.search.ingress.tls }}
+  {{- if .Values.dppIndexer.ingress.tls }}
   tls:
-    {{- range .Values.search.ingress.tls }}
+    {{- range .Values.dppIndexer.ingress.tls }}
     - hosts:
         {{- range .hosts }}
         - {{ . | quote }}
@@ -25,14 +25,14 @@ spec:
     {{- end }}
   {{- end }}
   rules:
-    - host: {{ .Values.search.name }}-{{ $.Values.global.domain }}
+    - host: {{ .Values.dppIndexer.name }}-{{ $.Values.global.domain }}
       http:
         paths:
           - path: /*
             pathType: ImplementationSpecific
             backend:
               service:
-                name: {{ include "tfg-ereuse-dpp.fullname" $ }}-{{ $.Values.search.name }}
+                name: {{ include "tfg-ereuse-dpp.fullname" $ }}-{{ $.Values.dppIndexer.name }}
                 port:
-                  number: {{ $.Values.search.service.port }}
+                  number: {{ $.Values.dppIndexer.service.port }}
 {{- end }}
