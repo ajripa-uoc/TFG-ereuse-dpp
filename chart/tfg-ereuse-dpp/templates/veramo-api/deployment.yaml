@@ -30,16 +30,4 @@ spec:
             initialDelaySeconds: 120
             httpGet:
               path: {{ .Values.veramoApi.healthcheck.path }}
-              port: {{ .Values.veramoApi.service.port }}
-          readinessProbe:
-            initialDelaySeconds: 120
-            httpGet:
-              path: {{ .Values.veramoApi.healthcheck.path }}
-              port: {{ .Values.veramoApi.service.port }}
-          volumeMounts:
-            - name: shared-storage
-              mountPath: {{ .Values.veramoApi.sharedStorage.mountPath }}
-      volumes:
-        - name: shared-storage
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
+              port: {{ .Value

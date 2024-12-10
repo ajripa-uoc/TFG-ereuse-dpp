@@ -206,5 +206,4 @@ volumes:
   did_resolver__module_src:
   dpp_indexer__data:
   dpp_indexer__src:
-  veramo_api__src:
-  create_operator_user__src:
+  veramo_ap

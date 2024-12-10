@@ -31,4 +31,4 @@ spec:
               port: {{ .Values.blockchainNode.service.port }}
           readinessProbe:
             tcpSocket:
-              port: {{ .Values.blockchainNode.service.port }}
+              port: {{ .Values.blockchain

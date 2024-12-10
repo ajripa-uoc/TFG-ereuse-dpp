@@ -24,9 +24,4 @@ spec:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
                 key: API_CONNECTOR_URL
         volumeMounts:
-          - name: shared-storage
-            mountPath: {{ .Values.createOperatorUser.sharedStorage.mountPath }}
-      volumes:
-        - name: shared-storage
-          persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
+          - name: sh

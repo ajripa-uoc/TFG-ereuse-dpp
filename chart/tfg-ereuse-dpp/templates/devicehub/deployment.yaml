@@ -48,4 +48,4 @@ spec:
       volumes:
         - name: shared-storage
           persistentVolumeClaim:
-            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}
+            claimName: {{ .Release.Name }}-{{ .Valu
