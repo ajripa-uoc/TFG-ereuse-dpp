@@ -17,6 +17,12 @@ spec:
         image: {{ .Values.createOperatorUser.image.repository }}:{{ .Values.createOperatorUser.image.tag }}
         imagePullPolicy: {{ .Values.apiConnector.image.pullPolicy | default .Values.global.imagePullPolicy }}
         command: ["./entrypoint.sh"]
+        env:
+          - name: API_CONNECTOR_URL
+            valueFrom:
+              configMapKeyRef:
+                name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
+                key: API_CONNECTOR_URL
         volumeMounts:
           - name: shared-storage
             mountPath: {{ .Values.createOperatorUser.sharedStorage.mountPath }}
