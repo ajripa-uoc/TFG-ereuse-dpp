@@ -5,7 +5,7 @@
 // return res.json()
 
 const axios = require("axios")
-//const api_url = process.env"http://api_connector:3010"
+//const api_url = "http://api_connector:3010"
 const api_url = process.env.API_CONNECTOR_URL || "http://api_connector:3010";
 const route = "registerUser"
 const params= {

@@ -35,6 +35,8 @@ devicehub:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub"
     tag: "latest"
+  config:
+    DEMO: true
 
   ingress:
     enabled: true

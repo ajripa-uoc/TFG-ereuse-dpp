@@ -20,7 +20,7 @@ module.exports = {
       loggingEnabled: false,
     },
     test: {
-      url: "NODE_IP",
+      url: NODE_IP,
       accounts: {
         mnemonic: "discover angle erosion trap barrel wage chest drop one raven tray degree",
         path: "m/44'/60'/0'/0",

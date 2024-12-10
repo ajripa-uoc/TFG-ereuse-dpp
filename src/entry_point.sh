@@ -10,6 +10,7 @@ main() {
                 echo "Contracts already deployed."
         else
                 echo "Deploying contracts..."
+                echo "NODE_IP: ${NODE_IP}"
                 npx hardhat run scripts/deploy.js --network test
         fi
 
