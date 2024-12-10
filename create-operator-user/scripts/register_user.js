@@ -20,4 +20,8 @@ axios.post(`${api_url}/${route}`, params, {
 }).then(response => {
     // DEBUG
     //console.error(response)
-    // returns api_t
+    // returns api_token for the register user-operator
+    console.log(response.data.data.api_token)
+}
+
+)

@@ -28,4 +28,6 @@ spec:
               path: {{ .Values.idIndexApi.healthcheck.path }}
               port: http
           readinessProbe:
-            httpGet
+            httpGet:
+              path: {{ .Values.idIndexApi.healthcheck.path }}
+              port: http

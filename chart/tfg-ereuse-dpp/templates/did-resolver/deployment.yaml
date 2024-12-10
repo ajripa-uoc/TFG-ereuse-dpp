@@ -33,4 +33,4 @@ spec:
           readinessProbe:
             httpGet:
               path: {{ .Values.didResolver.healthcheck.path }}
-              port: {{ .Values.didResolve
+              port: {{ .Values.didResolver.service.port }}

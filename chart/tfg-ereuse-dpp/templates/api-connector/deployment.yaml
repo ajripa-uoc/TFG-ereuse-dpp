@@ -37,4 +37,12 @@ spec:
           readinessProbe:
             initialDelaySeconds: 120
             httpGet:
-              path: {{ .Values.apiConnector.healthchec
+              path: {{ .Values.apiConnector.healthcheck.path }}
+              port: {{ .Values.apiConnector.service.port }}
+          volumeMounts:
+            - name: shared-storage
+              mountPath: {{ .Values.apiConnector.sharedStorage.mountPath }}
+      volumes:
+        - name: shared-storage
+          persistentVolumeClaim:
+            claimName: {{ .Release.Name }}-{{ .Values.global.sharedStorage.name }}

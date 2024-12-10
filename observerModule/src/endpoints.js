@@ -52,4 +52,11 @@ router
         res.header("Access-Control-Allow-Origin", "*");
         res.status(200);
         res.json({
-            
+            result
+        })
+    } catch (error){
+        console.error('Error:', error);
+    }
+})
+
+module.exports = router
