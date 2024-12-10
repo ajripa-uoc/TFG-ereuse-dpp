@@ -23,6 +23,8 @@ spec:
           ports:
             - containerPort: {{ .Values.apiConnector.service.port }}
               name: http
+          env:
+            SHARED: {{ .Values.apiConnector.sharedStorage.mountPath }}
           envFrom:
             - configMapRef:
                 name: {{ include "tfg-ereuse-dpp.fullname" . }}-shared-config
