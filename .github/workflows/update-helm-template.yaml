@@ -1,5 +1,5 @@
 # .github/workflows/update-helm-template.yml
-name: Update Helm Chart Template
+name: "Template: Update Helm Chart"
 
 on:
   workflow_call:

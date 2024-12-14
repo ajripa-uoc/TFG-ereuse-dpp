@@ -1,5 +1,5 @@
 # .github/workflows/docker-build-template.yml
-name: Docker Build and Push Template
+name: "Template: Docker Build and Push"
 
 on:
   workflow_call:
