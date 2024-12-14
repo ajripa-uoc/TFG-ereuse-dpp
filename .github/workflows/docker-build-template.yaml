@@ -16,11 +16,6 @@ on:
         description: 'Path to the Dockerfile'
         required: true
         type: string
-      platforms:
-        description: 'Platforms to build for (comma-separated)'
-        required: false
-        type: string
-        default: 'linux/amd64,linux/arm64'
       push_enabled:
         description: 'Whether to push the image'
         required: false
@@ -30,9 +25,6 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    permissions:
-      contents: read
-      packages: write
 
     steps:
       - name: Checkout repository
@@ -64,7 +56,6 @@ jobs:
         with:
           context: ${{ inputs.context_path }}
           file: ${{ inputs.dockerfile_path }}
-          platforms: ${{ inputs.platforms }}
           push: ${{ inputs.push_enabled }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
