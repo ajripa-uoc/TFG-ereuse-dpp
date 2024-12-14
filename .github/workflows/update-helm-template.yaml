@@ -24,6 +24,7 @@ on:
 jobs:
   update-helm:
     runs-on: ubuntu-latest
+    name: Update Helm Chart
     permissions:
       contents: write
 
