@@ -26,15 +26,27 @@ on:
         required: false
         type: string
         default: 'ghcr.io'
+    outputs:
+      image_full_name:
+        description: "Full repository name including registry"
+        value: ${{ jobs.build-and-push.outputs.image_full_name }}
+      sha_tag:
+        description: "SHA tag"
+        value: ${{ jobs.build-and-push.outputs.sha_tag }}
 
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
+    name: Build and push Docker image
 
     permissions:
       contents: read
       packages: write
       id-token: write
+
+    outputs:
+      image_full_name: ${{ steps.extract_info.outputs.image_full_name }}
+      sha_tag: ${{ steps.extract_info.outputs.sha_tag }}
 
     steps:
       - name: Checkout repository
@@ -60,6 +72,14 @@ jobs:
             type=ref,event=branch
             type=ref,event=tag
             type=raw,value=latest,enable={{is_default_branch}}
+
+      - name: Extract image info
+        id: extract_info
+        run: |
+          # Get the full repository name
+          echo "image_full_name=$(echo '${{ steps.meta.outputs.tags }}' | head -n 1 | cut -d':' -f1)" >> $GITHUB_OUTPUT
+          # Get the SHA tag
+          echo "sha_tag=$(echo '${{ steps.meta.outputs.tags }}' | grep 'sha-' | cut -d':' -f2)" >> $GITHUB_OUTPUT
 
       - name: Build and push
         uses: docker/build-push-action@v5

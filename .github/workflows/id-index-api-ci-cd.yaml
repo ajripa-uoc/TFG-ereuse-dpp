@@ -12,11 +12,28 @@ permissions:
   packages: write
   id-token: write
 
+env:
+  APP_NAME: tfg-ereuse-dpp
+  IMAGE_NAME: id-index-api
+  SERVICE_NAME: idIndexApi
+  CONTEXT_PATH: ./idIndexApi
+  DOCKERFILE_PATH: ./idIndexApi/Dockerfile
+
 jobs:
-  build-and-push:
-    name: Build and Push Docker image
+  build:
+    name: Build
     uses: ./.github/workflows/docker-build-template.yaml
     with:
-      image_name: tfg-ereuse-dpp/id-index-api
-      context_path: ./idIndexApi
-      dockerfile_path: ./idIndexApi/Dockerfile
+      image_name: $APP_NAME/$IMAGE_NAME
+      context_path: $CONTEXT_PATH
+      dockerfile_path: $DOCKERFILE_PATH
+
+  deploy:
+    name: Update helm chart
+    needs: build
+    uses: ./.github/workflows/update-helm-template.yaml
+    with:
+      chart_name: $CHART_NAME
+      service_name: $SERVICE_NAME
+      image_tag: ${{ needs.build.outputs.sha_tag }}
+      repo_name: ${{ needs.build.outputs.image_full_name }}
