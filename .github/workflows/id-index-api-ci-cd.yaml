@@ -30,3 +30,4 @@ jobs:
       service_name: idIndexApi
       image_tag: ${{ needs.build.outputs.sha_tag }}
       repo_name: ${{ needs.build.outputs.image_full_name }}
+      force_argocd_sync: true
