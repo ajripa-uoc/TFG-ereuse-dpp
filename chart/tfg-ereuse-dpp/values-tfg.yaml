@@ -1,36 +1,29 @@
 global:
   domain: ereuse-dpp.ajripa.click
-
 idIndexApi:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/id-index-api"
-    tag: "latest"
-
+    tag: "sha-d67eda395d3d2d0b92986c41216a9be62e75c149"
 blockchainNode:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/blockchain-node"
     tag: "latest"
-
 apiConnector:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/api-connector"
     tag: "latest"
-
 veramoApi:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/veramo-api"
     tag: "latest"
-
 didResolver:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/did-resolver"
     tag: "latest"
-
 dppIndexer:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/dpp-indexer"
     tag: "latest"
-
   ingress:
     enabled: true
     className: alb
@@ -42,14 +35,12 @@ dppIndexer:
       alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
       alb.ingress.kubernetes.io/backend-protocol: HTTP
       alb.ingress.kubernetes.io/healthcheck-port: '3014'
-
 devicehub:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub"
     tag: "latest"
   config:
     DEMO: true
-
   ingress:
     enabled: true
     className: alb
@@ -62,12 +53,10 @@ devicehub:
       alb.ingress.kubernetes.io/backend-protocol: HTTP
       alb.ingress.kubernetes.io/healthcheck-port: '8000'
       alb.ingress.kubernetes.io/healthcheck-path: /login/
-
 search:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/search"
     tag: "latest"
-
   ingress:
     enabled: true
     className: alb
@@ -79,7 +68,6 @@ search:
       alb.ingress.kubernetes.io/listen-ports: '[{"HTTPS": 443}]'
       alb.ingress.kubernetes.io/backend-protocol: HTTP
       alb.ingress.kubernetes.io/healthcheck-port: '3000'
-
 createOperatorUser:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/create-operator-user"
