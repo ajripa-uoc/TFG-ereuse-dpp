@@ -15,7 +15,7 @@ permissions:
 jobs:
   build:
     name: CI
-    uses: ./.github/workflows/templates/docker-build-template.yaml
+    uses: ./.github/workflows/docker-build-template.yaml
     with:
       image_name: tfg-ereuse-dpp/id-index-api
       context_path: ./idIndexApi
@@ -24,7 +24,7 @@ jobs:
   deploy:
     name: CD
     needs: build
-    uses: ./.github/workflows/templates/update-helm-template.yaml
+    uses: ./.github/workflows/update-helm-template.yaml
     with:
       chart_name: tfg-ereuse-dpp
       service_name: idIndexApi
