@@ -1,5 +1,5 @@
 # .github/workflows/id-index-api-ci-cd.yaml
-name: id-index-api CI/CD
+name: CI/CD id-index-api
 on:
   push:
     branches: [ main ]
