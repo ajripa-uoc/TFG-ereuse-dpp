@@ -24,16 +24,16 @@ jobs:
     name: CD
     uses: ./.github/workflows/docker-build-template.yaml
     with:
-      image_name: $APP_NAME/$IMAGE_NAME
-      context_path: $CONTEXT_PATH
-      dockerfile_path: $DOCKERFILE_PATH
+      image_name: ${{ env.APP_NAME }}/${{ env.IMAGE_NAME }}
+      context_path: ${{ env.CONTEXT_PATH }}
+      dockerfile_path: ${{ env.DOCKERFILE_PATH }}
 
   deploy:
     name: CI
     needs: build
     uses: ./.github/workflows/update-helm-template.yaml
     with:
-      chart_name: $CHART_NAME
-      service_name: $SERVICE_NAME
+      chart_name: ${{ env.APP_NAME }}
+      service_name: ${{ env.SERVICE_NAME }}
       image_tag: ${{ needs.build.outputs.sha_tag }}
       repo_name: ${{ needs.build.outputs.image_full_name }}
