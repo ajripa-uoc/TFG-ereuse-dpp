@@ -21,7 +21,7 @@ env:
 
 jobs:
   build:
-    name: CD
+    name: CI
     uses: ./.github/workflows/docker-build-template.yaml
     with:
       image_name: ${{ env.APP_NAME }}/${{ env.IMAGE_NAME }}
@@ -29,7 +29,7 @@ jobs:
       dockerfile_path: ${{ env.DOCKERFILE_PATH }}
 
   deploy:
-    name: CI
+    name: CD
     needs: build
     uses: ./.github/workflows/update-helm-template.yaml
     with:
