@@ -41,8 +41,8 @@ jobs:
         run: |
           cd chart/${CHART_NAME}
           # Update repository and tag using yq
-          yq -i e ".$SERVICENAME.image.repository = \"$REPO_NAME\"" values-tfg.yaml
-          yq -i e ".$SERVICENAME.image.tag = \"$IMAGE_TAG\"" values-tfg.yaml
+          yq -i e ".$SERVICE_NAME.image.repository = \"$REPO_NAME\"" values-tfg.yaml
+          yq -i e ".$SERVICE_NAME.image.tag = \"$IMAGE_TAG\"" values-tfg.yaml
 
           # Verify changes
           cat values-tfg.yaml
