@@ -66,7 +66,7 @@ jobs:
             "blockchainNode")
               IMAGE_NAME="blockchain-node"
               CONTEXT_PATH="./"
-              DOCKERFILE_PATH="./Dockerfile_blockchain_test_node
+              DOCKERFILE_PATH="./Dockerfile_blockchain_test_node"
               ;;
             "veramoApi")
               IMAGE_NAME="veramo-api"

@@ -37,7 +37,7 @@ on:
 jobs:
   build-and-push:
     runs-on: ubuntu-latest
-    name: Build and push Docker image
+    name: Build and push Docker image - ${{ inputs.image_name }}
 
     permissions:
       contents: read
