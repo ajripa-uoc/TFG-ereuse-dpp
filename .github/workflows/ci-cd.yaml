@@ -37,6 +37,8 @@ permissions:
   packages: write
   id-token: write
 
+run-name: CI/CD ${{ inputs.service }}
+
 jobs:
   # Set the different values for the service_name, image_name, context_path and dockerfile_path
   # according to the service selected in the workflow_dispatch input
