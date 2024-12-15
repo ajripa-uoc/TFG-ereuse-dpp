@@ -4,11 +4,11 @@ name: Deploy all services in parallel
 on:
   workflow_dispatch:
     inputs:
-        sync_argocd:
-          description: 'Force ArgoCD sync after deployment'
-          type: boolean
-          required: false
-          default: false
+      sync_argocd:
+        description: 'Force ArgoCD sync after deployment'
+        type: boolean
+        required: false
+        default: false
 
 jobs:
   deploy-all:
@@ -38,7 +38,7 @@ jobs:
               workflow_id: 'ci-cd.yaml',  // Your existing workflow file name
               ref: 'main',
               inputs: {
-                service: '${{ matrix.service }}'
+                service: '${{ matrix.service }}',
                 sync_argocd: '${{ github.event.inputs.sync_argocd }}'
               }
             });
