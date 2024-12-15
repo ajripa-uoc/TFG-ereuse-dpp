@@ -29,7 +29,7 @@ on:
 jobs:
   update-helm:
     runs-on: ubuntu-latest
-    name: Update Chart - ${{ inputs.service_name }}
+    name: Update Chart
     permissions:
       contents: write
 
@@ -65,7 +65,7 @@ jobs:
           git push
 
   sync-argocd:
-    name: Sync ArgoCD - ${{ inputs.service_name }}
+    name: Sync ArgoCD Application
     needs: update-helm
     runs-on: ubuntu-latest
     if: inputs.force_argocd_sync == true

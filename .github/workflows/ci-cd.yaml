@@ -41,7 +41,7 @@ jobs:
   # Set the different values for the service_name, image_name, context_path and dockerfile_path
   # according to the service selected in the workflow_dispatch input
   set-variables:
-    name: Set variables
+    name: Set variables - ${{ inputs.service }}
     runs-on: ubuntu-latest
     outputs:
       image_name: ${{ steps.set-vars.outputs.image_name }}
@@ -124,3 +124,15 @@ jobs:
       repo_name: ${{ needs.build.outputs.image_full_name }}
       force_argocd_sync: ${{ inputs.sync_argocd }}
     secrets: inherit
+
+  summary:
+    needs: [build, deploy]
+    runs-on: ubuntu-latest
+    steps:
+      - name: Add workflow summary
+        run: |
+          echo "## Deployment Summary" >> $GITHUB_STEP_SUMMARY
+          echo "* Service: ${{ inputs.service }}" >> $GITHUB_STEP_SUMMARY
+          echo "* Workflow Run ID: ${{ github.run_id }}" >> $GITHUB_STEP_SUMMARY
+          echo "* Commit: ${{ github.sha }}" >> $GITHUB_STEP_SUMMARY
+          echo "* Triggered by: ${{ github.actor }}" >> $GITHUB_STEP_SUMMARY
