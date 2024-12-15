@@ -88,7 +88,7 @@ jobs:
             "devicehub")
               IMAGE_NAME="device-hub"
               CONTEXT_PATH="./devicehub-django"
-              DOCKERFILE_PATH="./devicehub-djang/docker/devicehub-django.Dockerfile"
+              DOCKERFILE_PATH="./devicehub-django/docker/devicehub-django.Dockerfile"
               ;;
             "search")
               IMAGE_NAME="search"
