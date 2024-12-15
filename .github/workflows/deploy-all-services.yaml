@@ -1,7 +1,7 @@
 # Run this workflow manually to deploy all services sequentially
 # They modify the same repository, so they have to run sequentially
 
-name: Build and deploy All Services
+name: Build and deploy all services
 
 on:
   workflow_dispatch:
