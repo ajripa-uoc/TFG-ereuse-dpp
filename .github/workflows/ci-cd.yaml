@@ -1,0 +1,121 @@
+# .github/workflows/id-index-api-ci-cd.yaml
+name: CI/CD id-index-api
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'idIndexApi/**'
+  workflow_dispatch:
+    inputs:
+      service:
+        description: 'Service to build and deploy'
+        type: choice
+        required: true
+        options:
+          - idIndexApi
+          - apiConnector
+          - blockchainNode
+          - veramoApi
+          - didResolver
+          - dppIndexer
+          - devicehub
+          - search
+          - createOperatorUser
+      app_name:
+        description: 'Application name'
+        type: string
+        required: true
+        default: 'tfg-ereuse-dpp'
+
+permissions:
+  contents: write
+  packages: write
+  id-token: write
+
+jobs:
+  # Set the different values for the service_name, image_name, context_path and dockerfile_path
+  # according to the service selected in the workflow_dispatch input
+  set-variables:
+    name: Set variables
+    runs-on: ubuntu-latest
+    outputs:
+      image_name: ${{ steps.set-vars.outputs.image_name }}
+      context_path: ${{ steps.set-vars.outputs.context_path }}
+      dockerfile_path: ${{ steps.set-vars.outputs.dockerfile_path }}
+    steps:
+      - name: Set variables
+        id: set-vars
+        run: |
+          # Map service names to image names
+          case "${{ inputs.service }}" in
+            "idIndexApi")
+              IMAGE_NAME=id-index-api"
+              CONTEXT_PATH="./idIndexApi"
+              DOCKERFILE_PATH="./idIndexApi/Dockerfile"
+              ;;
+            "apiConnector")
+              IMAGE_NAME="api-connector"
+              CONTEXT_PATH="./"
+              DOCKERFILE_PATH="./Dockerfile"
+              ;;
+            "blockchainNode")
+              IMAGE_NAME="blockchain-node"
+              CONTEXT_PATH="./
+              DOCKERFILE_PATH="./Dockerfile_blockchain_test_node
+              ;;
+            "veramoApi")
+              IMAGE_NAME="veramo-api"
+              CONTEXT_PATH="./veramoApi"
+              DOCKERFILE_PATH="./veramoApi/Dockerfile"
+              ;;
+            "didResolver")
+              IMAGE_NAME="did-resolver"
+              CONTEXT_PATH="./"
+              DOCKERFILE_PATH="./didResolverApi/Dockerfile"
+              ;;
+            "dppIndexer")
+              IMAGE_NAME="dpp-indexer"
+              CONTEXT_PATH="./"
+              DOCKERFILE_PATH="./observerModule/Dockerfile"
+              ;;
+            "devicehub")
+              IMAGE_NAME="device-hub"
+              CONTEXT_PATH="./devicehub-django"
+              DOCKERFILE_PATH="./docker/devicehub-django.Dockerfile"
+              ;;
+            "search")
+              IMAGE_NAME="search"
+              CONTEXT_PATH="./searchEngine"
+              DOCKERFILE_PATH="./searchEngine/Dockerfile"
+              ;;
+            "createOperatorUser")
+              IMAGE_NAME="create-operator-user"
+              CONTEXT_PATH="./create-operator-user"
+              DOCKERFILE_PATH="./Dockerfile"
+              ;;
+          esac
+
+          echo "image_name=${{ inputs.app_name }}/${IMAGE_NAME}" >> $GITHUB_OUTPUT
+          echo "context_path=${CONTEXT_PATH}" >> $GITHUB_OUTPUT
+          echo "dockerfile_path=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
+
+  build:
+    name: CI
+    needs: set-variables
+    uses: ./.github/workflows/docker-build-template.yaml
+    with:
+      image_name: ${{ needs.set-variables.outputs.image_name }}
+      context_path: ${{ needs.set-variables.outputs.context_path }}
+      dockerfile_path: ${{ needs.set-variables.outputs.dockerfile_path }}
+
+  deploy:
+    name: CD
+    needs: build
+    uses: ./.github/workflows/update-helm-template.yaml
+    with:
+      chart_name: ${{ inputs.app_name }}
+      service_name: ${{ inputs.service }}
+      image_tag: ${{ needs.build.outputs.sha_tag }}
+      repo_name: ${{ needs.build.outputs.image_full_name }}
+      force_argocd_sync: true
+    secrets: inherit
