@@ -6,7 +6,7 @@ name: Build and deploy all services
 on:
  workflow_dispatch:
    inputs:
-     force_argocd_sync:
+     sync_argocd:
        description: 'Force ArgoCD sync after deployment'
        type: boolean
        required: false
@@ -44,7 +44,7 @@ jobs:
                ref: 'main',
                inputs: {
                  service: service,
-                 force_argocd_sync: '${{ github.event.inputs.force_argocd_sync }}'
+                 sync_argocd: '${{ github.event.inputs.sync_argocd }}'
                }
              });
 
