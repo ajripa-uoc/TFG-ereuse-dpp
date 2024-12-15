@@ -59,10 +59,18 @@ jobs:
         run: |
           git config --global user.name 'GitHub Actions'
           git config --global user.email 'github-actions@github.com'
+          git config --global pull.rebase true
+
           git add .
-          git commit -m "$COMMIT_MESSAGE"
-          git pull
-          git push
+          git commit -m "gitops: update ${SERVICE_NAME} image to ${IMAGE_TAG}"
+
+          #Pull with rebase and retry if it fails
+          for i in {1..5}; do
+            if git pull && git push; then
+              break
+            fi
+            sleep 5
+          done
 
   sync-argocd:
     name: Sync ArgoCD Application
