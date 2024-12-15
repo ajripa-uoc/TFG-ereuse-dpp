@@ -23,7 +23,7 @@ didResolver:
 dppIndexer:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/dpp-indexer"
-    tag: "latest"
+    tag: "sha-58804e9ca07e343a3c8d9e4edd2b78af1c80620f"
   ingress:
     enabled: true
     className: alb
