@@ -126,6 +126,7 @@ jobs:
     secrets: inherit
 
   summary:
+    name: Deployment Summary
     needs: [build, deploy]
     runs-on: ubuntu-latest
     steps:
