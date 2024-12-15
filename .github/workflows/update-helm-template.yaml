@@ -62,7 +62,7 @@ jobs:
           git config --global pull.rebase true
 
           git add .
-          git commit -m "gitops: update ${SERVICE_NAME} image to ${IMAGE_TAG}"
+          git commit -m "$COMMIT_MESSAGE"
 
           #Pull with rebase and retry if it fails
           for i in {1..5}; do
