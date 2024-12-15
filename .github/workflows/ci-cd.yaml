@@ -26,6 +26,11 @@ on:
         type: string
         required: true
         default: 'tfg-ereuse-dpp'
+      sync_argocd:
+        description: 'Force ArgoCD sync'
+        type: boolean
+        required: false
+        default: false
 
 permissions:
   contents: write
@@ -117,5 +122,5 @@ jobs:
       service_name: ${{ inputs.service }}
       image_tag: ${{ needs.build.outputs.sha_tag }}
       repo_name: ${{ needs.build.outputs.image_full_name }}
-      force_argocd_sync: true
+      force_argocd_sync: ${{ inputs.sync_argocd }}
     secrets: inherit
