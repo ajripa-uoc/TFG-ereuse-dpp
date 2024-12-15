@@ -38,7 +38,7 @@ dppIndexer:
 devicehub:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/device-hub"
-    tag: "sha-b94f76f91a1181f3e24c53c5acf4e9dd7439d268"
+    tag: "sha-4b5913c64df52d346e0939a53eb3c63f68bd4bc3"
   config:
     DEMO: true
   ingress:
