@@ -3,7 +3,7 @@ global:
 idIndexApi:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/id-index-api"
-    tag: "sha-6e75dd477505a15ad7d0ce675b7b78b899b21e75"
+    tag: "sha-10d969335e92a42358dbefa0b1e0c84c5783b0e1"
 blockchainNode:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/blockchain-node"
