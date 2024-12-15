@@ -37,8 +37,8 @@ dppIndexer:
       alb.ingress.kubernetes.io/healthcheck-port: '3014'
 devicehub:
   image:
-    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/devicehub"
-    tag: "latest"
+    repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/device-hub"
+    tag: "sha-b94f76f91a1181f3e24c53c5acf4e9dd7439d268"
   config:
     DEMO: true
   ingress:
