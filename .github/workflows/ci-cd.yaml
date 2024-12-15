@@ -105,7 +105,7 @@ jobs:
           echo "dockerfile_path=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
 
   build:
-    name: CI
+    name: CI - ${{ inputs.service }}
     needs: set-variables
     uses: ./.github/workflows/docker-build-template.yaml
     with:
@@ -114,7 +114,7 @@ jobs:
       dockerfile_path: ${{ needs.set-variables.outputs.dockerfile_path }}
 
   deploy:
-    name: CD
+    name: CD - ${{ inputs.service }}
     needs: build
     uses: ./.github/workflows/update-helm-template.yaml
     with:
