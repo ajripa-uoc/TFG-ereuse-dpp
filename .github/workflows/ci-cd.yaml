@@ -54,7 +54,7 @@ jobs:
           # Map service names to image names
           case "${{ inputs.service }}" in
             "idIndexApi")
-              IMAGE_NAME=id-index-api"
+              IMAGE_NAME="id-index-api"
               CONTEXT_PATH="./idIndexApi"
               DOCKERFILE_PATH="./idIndexApi/Dockerfile"
               ;;
@@ -65,7 +65,7 @@ jobs:
               ;;
             "blockchainNode")
               IMAGE_NAME="blockchain-node"
-              CONTEXT_PATH="./
+              CONTEXT_PATH="./"
               DOCKERFILE_PATH="./Dockerfile_blockchain_test_node
               ;;
             "veramoApi")
@@ -105,7 +105,7 @@ jobs:
           echo "dockerfile_path=${DOCKERFILE_PATH}" >> $GITHUB_OUTPUT
 
   build:
-    name: CI - ${{ inputs.service }}
+    name: CI
     needs: set-variables
     uses: ./.github/workflows/docker-build-template.yaml
     with:
@@ -114,7 +114,7 @@ jobs:
       dockerfile_path: ${{ needs.set-variables.outputs.dockerfile_path }}
 
   deploy:
-    name: CD - ${{ inputs.service }}
+    name: CD
     needs: build
     uses: ./.github/workflows/update-helm-template.yaml
     with:
