@@ -1,0 +1,43 @@
+# Run this workflow manually to deploy all services in parallel
+name: Deploy All Services
+
+on:
+  workflow_dispatch:
+    inputs:
+        sync_argocd:
+          description: 'Force ArgoCD sync after deployment'
+          type: boolean
+          required: false
+          default: false
+
+jobs:
+  deploy-all:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        service: [
+          'idIndexApi',
+          'apiConnector',
+          'blockchainNode',
+          'veramoApi',
+          'didResolver',
+          'dppIndexer',
+          'devicehub',
+          'search',
+          'createOperatorUser'
+        ]
+    steps:
+      - name: Trigger service deployment
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            await github.rest.actions.createWorkflowDispatch({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              workflow_id: 'ci-cd.yaml',  // Your existing workflow file name
+              ref: 'main',
+              inputs: {
+                service: '${{ matrix.service }}'
+              }
+            });
