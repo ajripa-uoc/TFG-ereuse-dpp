@@ -88,7 +88,7 @@ jobs:
             "devicehub")
               IMAGE_NAME="device-hub"
               CONTEXT_PATH="./devicehub-django"
-              DOCKERFILE_PATH="./docker/devicehub-django.Dockerfile"
+              DOCKERFILE_PATH="./devicehub-djang/docker/devicehub-django.Dockerfile"
               ;;
             "search")
               IMAGE_NAME="search"
@@ -98,7 +98,7 @@ jobs:
             "createOperatorUser")
               IMAGE_NAME="create-operator-user"
               CONTEXT_PATH="./create-operator-user"
-              DOCKERFILE_PATH="./Dockerfile"
+              DOCKERFILE_PATH="./create-operator-user/Dockerfile"
               ;;
           esac
 
