@@ -71,4 +71,4 @@ search:
 createOperatorUser:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/create-operator-user"
-    tag: "latest"
+    tag: "sha-22da7091c8f62d0cdb401f2b7f8f44f28a806da8"
