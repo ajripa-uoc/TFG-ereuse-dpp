@@ -1,5 +1,5 @@
 # Run this workflow manually to deploy all services in parallel
-name: Deploy All Services
+name: Deploy all services in parallel
 
 on:
   workflow_dispatch:
