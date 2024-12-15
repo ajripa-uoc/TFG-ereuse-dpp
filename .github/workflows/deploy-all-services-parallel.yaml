@@ -11,7 +11,7 @@ on:
         default: false
 
 jobs:
-  deploy-all:
+  deploy-services:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -28,17 +28,59 @@ jobs:
         ]
     steps:
       - name: Trigger service deployment
+        id: trigger
         uses: actions/github-script@v7
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            await github.rest.actions.createWorkflowDispatch({
+            const response = await github.rest.actions.createWorkflowDispatch({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              workflow_id: 'ci-cd.yaml',  // Your existing workflow file name
+              workflow_id: 'ci-cd.yaml',
               ref: 'main',
               inputs: {
                 service: '${{ matrix.service }}',
                 sync_argocd: '${{ github.event.inputs.sync_argocd }}'
               }
             });
+
+            console.log(`Triggered workflow for ${{ matrix.service }}`);
+            let completed = false;
+            let attempts = 0;
+            const maxAttempts = 60; // 30 minutes maximum wait
+
+            while (!completed && attempts < maxAttempts) {
+              attempts++;
+              await new Promise(r => setTimeout(r, 30000)); // 30 second wait
+
+              const runs = await github.rest.actions.listWorkflowRuns({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                workflow_id: 'ci-cd.yaml',
+                per_page: 1
+              });
+
+              if (runs.data.workflow_runs.length > 0) {
+                const run = runs.data.workflow_runs[0];
+                if (run.status === 'completed') {
+                  if (run.conclusion === 'success') {
+                    console.log(`✅ ${{ matrix.service }} deployment succeeded`);
+                    completed = true;
+                  } else {
+                    throw new Error(`Deployment failed with status: ${run.conclusion}`);
+                  }
+                }
+              }
+            }
+
+            if (!completed) {
+              throw new Error('Deployment timed out');
+            }
+
+  check-deployments:
+    needs: deploy-services
+    runs-on: ubuntu-latest
+    steps:
+      - name: Verify all deployments
+        run: |
+          echo "All services deployed successfully"
