@@ -40,7 +40,7 @@ jobs:
               ref: 'main',
               inputs: {
                 service: '${{ matrix.service }}',
-                sync_argocd: '${{ github.event.inputs.sync_argocd }}'
+                sync_argocd: '${{ inputs.sync_argocd }}'
               }
             });
 
