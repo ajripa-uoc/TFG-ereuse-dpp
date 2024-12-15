@@ -48,7 +48,7 @@ jobs:
       context_path: ${{ steps.set-vars.outputs.context_path }}
       dockerfile_path: ${{ steps.set-vars.outputs.dockerfile_path }}
     steps:
-      - name: Set variables
+      - name: ${{ inputs.service }}
         id: set-vars
         run: |
           # Map service names to image names
