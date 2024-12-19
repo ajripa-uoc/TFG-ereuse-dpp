@@ -64,7 +64,7 @@ jobs:
                 const run = runs.data.workflow_runs[0];
                 if (run.status === 'completed') {
                   if (run.conclusion === 'success') {
-                    console.log(`✅ ${{ matrix.service }} deployment succeeded`);
+                    console.log(`${{ matrix.service }} deployment succeeded`);
                     completed = true;
                   } else {
                     throw new Error(`Deployment failed with status: ${run.conclusion}`);
