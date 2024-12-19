@@ -19,7 +19,7 @@ veramoApi:
 didResolver:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/did-resolver"
-    tag: "sha-96eb880e4753fe0b036cdcabeeef6822168f3a72"
+    tag: "sha-e87e9d4d0e202725db7ff41fc8dcd0c82c9cd994"
 dppIndexer:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/dpp-indexer"
