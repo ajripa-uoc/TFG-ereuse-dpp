@@ -11,7 +11,7 @@ blockchainNode:
 apiConnector:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/api-connector"
-    tag: "sha-96eb880e4753fe0b036cdcabeeef6822168f3a72"
+    tag: "sha-37aeda83bfea1d6e284be4446ab0600e14aeac77"
 veramoApi:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/veramo-api"
