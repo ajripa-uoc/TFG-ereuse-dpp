@@ -15,7 +15,7 @@ apiConnector:
 veramoApi:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/veramo-api"
-    tag: "sha-666430193843524f6db36d80918cf98907c42411"
+    tag: "sha-dd273d23e7681f0155c1ff4a037a1d84837802ab"
 didResolver:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/did-resolver"
