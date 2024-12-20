@@ -7,7 +7,7 @@ idIndexApi:
 blockchainNode:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/blockchain-node"
-    tag: "sha-a65816a4bc713e894465699d952727c0f854e7a2"
+    tag: "sha-dd273d23e7681f0155c1ff4a037a1d84837802ab"
 apiConnector:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/api-connector"
