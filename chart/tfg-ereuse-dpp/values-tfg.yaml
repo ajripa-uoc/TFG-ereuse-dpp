@@ -56,7 +56,7 @@ devicehub:
 search:
   image:
     repository: "ghcr.io/ajripa-uoc/tfg-ereuse-dpp/search"
-    tag: "sha-25697b6d8e224e7c4d21c36b74c4db4473f9dd1b"
+    tag: "sha-dd273d23e7681f0155c1ff4a037a1d84837802ab"
   ingress:
     enabled: true
     className: alb
